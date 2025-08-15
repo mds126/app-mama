@@ -157,7 +157,6 @@ const verbs = [
   {"infinitive":"withstand","past":"withstood","past_participle":"withstood","fr":"résister à"},
   {"infinitive":"wring","past":"wrung","past_participle":"wrung","fr":"tordre / essorer"},
   {"infinitive":"write","past":"wrote","past_participle":"written","fr":"écrire"}
-]
 ];
 
 let currentVerb = null;
@@ -168,7 +167,15 @@ let attempts = 0;
 function pickNewVerb() {
   const randomIndex = Math.floor(Math.random() * verbs.length);
   currentVerb = verbs[randomIndex];
-  document.getElementById('base-verb').textContent = currentVerb.base;
+
+  document.getElementById('base-verb').textContent = currentVerb.infinitive;
+  document.getElementById('french-translation').textContent = currentVerb.fr;
+  document.getElementById('past').value = "";
+  document.getElementById('participle').value = "";
+  document.getElementById('feedback').textContent = "";
+  document.getElementById('feedback').className = 'feedback';
+}  // reset inputs and feedback...
+}
   // Réinitialiser les champs et le message pour la nouvelle question
   document.getElementById('past').value = "";
   document.getElementById('participle').value = "";
@@ -199,15 +206,21 @@ document.getElementById('validateBtn').addEventListener('click', () => {
   // Mettre à jour le nombre de tentatives
   attempts++;
   // Vérifier la réponse (insensible à la casse)
-  const isCorrect = pastInput.toLowerCase() === currentVerb.past.toLowerCase() &&
-                    ppInput.toLowerCase() === currentVerb.pp.toLowerCase();
+   function matchesForm(input, correct) {
+  return correct.toLowerCase()
+    .split('/')
+    .some(form => form.trim() === input.toLowerCase());
+}
+  const isCorrect =
+  matchesForm(pastInput, currentVerb.past) &&
+  matchesForm(ppInput, currentVerb.past_participle);
   if (isCorrect) {
     score++;
     document.getElementById('feedback').textContent = "Correct ! ✔";
     document.getElementById('feedback').className = 'feedback correct';
   } else {
     document.getElementById('feedback').textContent = "Incorrect... Les réponses étaient : " +
-      `${currentVerb.past} / ${currentVerb.pp}`;
+  `${currentVerb.past} / ${currentVerb.past_participle}`;
     document.getElementById('feedback').className = 'feedback incorrect';
   }
   updateProgress();
