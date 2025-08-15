@@ -12,44 +12,40 @@
     <h1>Quiz des verbes irréguliers</h1>
 
     <!-- Zone d'affichage du verbe -->
-    <section class="prompt">
-      <div class="verb">
+    <section class="question">
+      <p>
         <span class="label">Base verbale :</span>
         <span id="base-verb" class="value">—</span>
-      </div>
-      <div class="verb">
+      </p>
+      <p>
         <span class="label">Traduction (FR) :</span>
         <span id="french-translation" class="value">—</span>
-      </div>
+      </p>
     </section>
 
     <!-- Champs de saisie -->
-    <section class="inputs">
-      <div class="field">
+    <section class="answers">
+      <div class="field-group">
         <label for="past">Prétérit</label>
         <input id="past" type="text" placeholder="ex: went" autocomplete="off" />
       </div>
-      <div class="field">
+      <div class="field-group">
         <label for="participle">Participe passé</label>
         <input id="participle" type="text" placeholder="ex: gone" autocomplete="off" />
       </div>
     </section>
 
     <!-- Boutons d'action -->
-    <section class="actions">
+    <section class="buttons">
       <button id="validateBtn" type="button">Valider</button>
       <button id="newBtn" type="button">Nouveau</button>
       <button id="resetBtn" type="button">Réinitialiser</button>
     </section>
 
     <!-- Barre de progression -->
-    <section class="progress">
-      <div class="progress-header">
-        <span id="progress-text">0 / 0 (0%)</span>
-      </div>
-      <div class="progress-bar">
-        <div id="progress-bar" class="progress-inner" style="width: 0%"></div>
-      </div>
+    <section class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+      <span id="progress-text">0 / 0 (0%)</span>
     </section>
 
     <!-- Message de feedback -->
