@@ -5,7 +5,6 @@
   <title>Quiz – Irregular Verbs</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="manifest" href="./manifest.webmanifest">
-
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js');
@@ -43,7 +42,9 @@
 
       <!-- Add as many question blocks as you need -->
 
-      <button type="submit" id="submit">Valider</button>
+      <div class="buttons">
+        <button type="submit" id="submit">Valider</button>
+      </div>
     </form>
 
     <div id="result"></div>
