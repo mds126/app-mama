@@ -1,53 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz – Irregular Verbs</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="manifest" href="./manifest.webmanifest">
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js');
-    }
-  </script>
+  <meta charset="utf-8" />
+  <title>Quiz des verbes irréguliers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="./styles.css" rel="stylesheet" />
 </head>
 <body>
-  <div class="container">
-    <h1>Quiz &ndash; Irregular Verbs</h1>
+  <main class="container">
+    <h1>Quiz des verbes irréguliers</h1>
 
-    <div class="field-group">
-      <label for="pseudo">Pseudo :</label>
-      <input type="text" id="pseudo" placeholder="Entrez votre pseudo">
-    </div>
-
-    <div class="question">
-      <p>Donne les formes de « <span id="base-verb"></span> » :</p>
-    </div>
-
-    <div class="answers">
-      <div class="field-group">
-        <label for="past">Prétérit :</label>
-        <input type="text" id="past">
+    <section class="prompt">
+      <div class="verb">
+        <span class="label">Base verbale:</span>
+        <span id="base-verb" class="value">—</span>
       </div>
-      <div class="field-group">
-        <label for="participle">Participe passé :</label>
-        <input type="text" id="participle">
+      <div class="verb">
+        <span class="label">Traduction (FR):</span>
+        <span id="french-translation" class="value">—</span>
       </div>
-    </div>
+    </section>
 
-    <div class="buttons">
-      <button id="validateBtn">Valider</button>
-      <button id="newBtn">Nouveau</button>
-      <button id="resetBtn">Reset</button>
-    </div>
+    <section class="inputs">
+      <div class="field">
+        <label for="past">Prétérit</label>
+        <input id="past" type="text" placeholder="ex: went" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="participle">Participe passé</label>
+        <input id="participle" type="text" placeholder="ex: gone" autocomplete="off" />
+      </div>
+    </section>
 
-    <div id="feedback" class="feedback"></div>
+    <section class="actions">
+      <button id="validateBtn" type="button">Valider</button>
+      <button id="newBtn" type="button">Nouveau</button>
+      <button id="resetBtn" type="button">Réinitialiser</button>
+    </section>
 
-    <div class="progress-container">
-      <div id="progress-bar" class="progress-bar"></div>
-    </div>
-    <div id="progress-text">0 / 0 (0%)</div>
-  </div>
+    <section class="progress">
+      <div class="progress-header">
+        <span id="progress-text">0 / 0 (0%)</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar" class="progress-inner" style="width: 0%"></div>
+      </div>
+    </section>
+
+    <p id="feedback" class="feedback"></p>
+  </main>
 
   <script src="./app.js"></script>
 </body>
