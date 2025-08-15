@@ -4,20 +4,35 @@
   <meta charset="UTF-8">
   <title>Quiz – Irregular Verbs</title>
   <link rel="stylesheet" href="./style.css">
-<link rel="manifest" href="./manifest.webmanifest">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-  }
-</script>
+  <link rel="manifest" href="./manifest.webmanifest">
 
+  <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js');
     }
   </script>
 </head>
 <body>
-  ...
- <script src="./app.js"></script>
+  <div class="container">
+    <h1>Quiz – Irregular Verbs</h1>
+    
+    <div class="field-group">
+      <label for="pseudo">Pseudo :</label>
+      <input type="text" id="pseudo" placeholder="Entrez votre pseudo">
+    </div>
+
+    <!-- ✏️ Your full quiz content starts here -->
+    <div class="quiz">
+      <p>Question 1 : Go – <input type="text" name="q1" placeholder="Prétérit"> / <input type="text" name="q1p" placeholder="Participe passé"></p>
+      <p>Question 2 : See – <input type="text" name="q2" placeholder="Prétérit"> / <input type="text" name="q2p" placeholder="Participe passé"></p>
+      <!-- Ajoutez le reste de vos questions -->
+    </div>
+
+    <button id="submit">Valider</button>
+    <div id="result"></div>
+    <!-- ✏️ Your full quiz content ends here -->
+  </div>
+
+  <script src="./app.js"></script>
 </body>
 </html>
