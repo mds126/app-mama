@@ -163,33 +163,46 @@ let currentVerb = null;
 let score = 0;
 let attempts = 0;
 
-// Choisir un nouveau verbe au hasard
+// Choisir un nouveau verbe au hasard et réinitialiser les champs
 function pickNewVerb() {
   const randomIndex = Math.floor(Math.random() * verbs.length);
   currentVerb = verbs[randomIndex];
 
   document.getElementById('base-verb').textContent = currentVerb.infinitive;
   document.getElementById('french-translation').textContent = currentVerb.fr;
-  document.getElementById('past').value = "";
-  document.getElementById('participle').value = "";
-  document.getElementById('feedback').textContent = "";
+
+  document.getElementById('past').value = '';
+  document.getElementById('participle').value = '';
+  document.getElementById('feedback').textContent = '';
   document.getElementById('feedback').className = 'feedback';
 }
-  // reset inputs and feedback...
+
+// Vérifie qu’une saisie correspond à l’une des formes possibles (séparées par /)
 function matchesForm(input, correct) {
+  if (!correct) return false;
+  const user = input.trim().toLowerCase();
   return correct
     .toLowerCase()
     .split('/')
-    .some(form => form.trim() === input.toLowerCase());
+    .some(form => form.trim() === user);
 }
+
+// Mettre à jour la barre de progression et le texte
+function updateProgress() {
+  const percent = attempts > 0 ? Math.round((score / attempts) * 100) : 0;
+  document.getElementById('progress-text').textContent = `${score} / ${attempts} (${percent}%)`;
+  document.getElementById('progress-bar').style.width = percent + '%';
+}
+
+// Événement du bouton Valider (vérifier la réponse)
 document.getElementById('validateBtn').addEventListener('click', () => {
   if (!currentVerb) return;
 
   const pastInput = document.getElementById('past').value.trim();
-  const ppInput   = document.getElementById('participle').value.trim();
+  const ppInput = document.getElementById('participle').value.trim();
 
   if (!pastInput || !ppInput) {
-    document.getElementById('feedback').textContent = "Veuillez remplir les deux champs.";
+    document.getElementById('feedback').textContent = 'Veuillez remplir les deux champs.';
     document.getElementById('feedback').className = 'feedback incorrect';
     return;
   }
@@ -202,7 +215,7 @@ document.getElementById('validateBtn').addEventListener('click', () => {
 
   if (isCorrect) {
     score++;
-    document.getElementById('feedback').textContent = "Correct ! ✔";
+    document.getElementById('feedback').textContent = 'Correct ! ✔';
     document.getElementById('feedback').className = 'feedback correct';
   } else {
     document.getElementById('feedback').textContent =
@@ -210,51 +223,6 @@ document.getElementById('validateBtn').addEventListener('click', () => {
     document.getElementById('feedback').className = 'feedback incorrect';
   }
 
-  updateProgress();
-});
-  // Réinitialiser les champs et le message pour la nouvelle question
-  document.getElementById('past').value = "";
-  document.getElementById('participle').value = "";
-  document.getElementById('feedback').textContent = "";
-  document.getElementById('feedback').className = 'feedback';
-}
-
-// Mettre à jour la barre de progression et le texte
-function updateProgress() {
-  const percent = attempts > 0 ? Math.round((score / attempts) * 100) : 0;
-  document.getElementById('progress-text').textContent = 
-    `${score} / ${attempts} (${percent}%)`;
-  document.getElementById('progress-bar').style.width = percent + "%";
-}
-
-// Événement du bouton Valider (vérifier la réponse)
-document.getElementById('validateBtn').addEventListener('click', () => {
-  if (!currentVerb) return;
-  const pastInput = document.getElementById('past').value.trim();
-  const ppInput = document.getElementById('participle').value.trim();
-  // Vérifier que les deux champs sont remplis
-  if (!pastInput || !ppInput) {
-    document.getElementById('feedback').textContent = 
-      "Veuillez remplir les deux champs.";
-    document.getElementById('feedback').className = 'feedback incorrect';
-    return;
-  }
-  // Mettre à jour le nombre de tentatives
-  attempts++;
-  // Vérifier la réponse (insensible à la casse)
-
-  const isCorrect =
-  matchesForm(pastInput, currentVerb.past) &&
-  matchesForm(ppInput, currentVerb.past_participle);
-  if (isCorrect) {
-    score++;
-    document.getElementById('feedback').textContent = "Correct ! ✔";
-    document.getElementById('feedback').className = 'feedback correct';
-  } else {
-    document.getElementById('feedback').textContent = "Incorrect... Les réponses étaient : " +
-  `${currentVerb.past} / ${currentVerb.past_participle}`;
-    document.getElementById('feedback').className = 'feedback incorrect';
-  }
   updateProgress();
 });
 
@@ -274,5 +242,8 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 // Initialiser le premier verbe au chargement de la page
 window.addEventListener('load', () => {
   pickNewVerb();
+  updateProgress();
 });
-const API_BASE = "https://verbsquiz.onrender.com";   // ← ou l’URL ngrok
+
+// Optionnel: base API si nécessaire (non utilisé ici)
+// const API_BASE = "https://verbsquiz.onrender.com";
