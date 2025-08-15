@@ -1,55 +1,95 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <title>Quiz des verbes irréguliers</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="./styles.css" rel="stylesheet" />
-</head>
-<body>
-  <main class="container">
-    <h1>Quiz des verbes irréguliers</h1>
+// gardez ici votre const verbs = [ ... ] tel que vous l'avez
 
-    <section class="prompt">
-      <div class="verb">
-        <span class="label">Base verbale:</span>
-        <span id="base-verb" class="value">—</span>
-      </div>
-      <div class="verb">
-        <span class="label">Traduction (FR):</span>
-        <span id="french-translation" class="value">—</span>
-      </div>
-    </section>
+let currentVerb = null;
+let score = 0;
+let attempts = 0;
 
-    <section class="inputs">
-      <div class="field">
-        <label for="past">Prétérit</label>
-        <input id="past" type="text" placeholder="ex: went" autocomplete="off" />
-      </div>
-      <div class="field">
-        <label for="participle">Participe passé</label>
-        <input id="participle" type="text" placeholder="ex: gone" autocomplete="off" />
-      </div>
-    </section>
+// Choisir un nouveau verbe et remplir l'UI
+function pickNewVerb() {
+  const randomIndex = Math.floor(Math.random() * verbs.length);
+  currentVerb = verbs[randomIndex];
 
-    <section class="actions">
-      <button id="validateBtn" type="button">Valider</button>
-      <button id="newBtn" type="button">Nouveau</button>
-      <button id="resetBtn" type="button">Réinitialiser</button>
-    </section>
+  const baseEl = document.getElementById('base-verb');
+  const frEl = document.getElementById('french-translation');
+  const pastEl = document.getElementById('past');
+  const ppEl = document.getElementById('participle');
+  const fbEl = document.getElementById('feedback');
 
-    <section class="progress">
-      <div class="progress-header">
-        <span id="progress-text">0 / 0 (0%)</span>
-      </div>
-      <div class="progress-bar">
-        <div id="progress-bar" class="progress-inner" style="width: 0%"></div>
-      </div>
-    </section>
+  if (baseEl) baseEl.textContent = currentVerb.infinitive;
+  if (frEl) frEl.textContent = currentVerb.fr;
 
-    <p id="feedback" class="feedback"></p>
-  </main>
+  if (pastEl) pastEl.value = '';
+  if (ppEl) ppEl.value = '';
+  if (fbEl) {
+    fbEl.textContent = '';
+    fbEl.className = 'feedback';
+  }
+}
 
-  <script src="./app.js"></script>
-</body>
-</html>
+// Autoriser plusieurs formes (ex: learnt/learned)
+function matchesForm(input, correct) {
+  if (!correct) return false;
+  const user = input.trim().toLowerCase();
+  return correct
+    .toLowerCase()
+    .split('/')
+    .some(form => form.trim() === user);
+}
+
+// Mettre à jour la progression
+function updateProgress() {
+  const percent = attempts > 0 ? Math.round((score / attempts) * 100) : 0;
+  const txt = document.getElementById('progress-text');
+  const bar = document.getElementById('progress-bar');
+  if (txt) txt.textContent = `${score} / ${attempts} (${percent}%)`;
+  if (bar) bar.style.width = percent + '%';
+}
+
+// Valider
+document.getElementById('validateBtn').addEventListener('click', () => {
+  if (!currentVerb) return;
+
+  const pastInput = document.getElementById('past').value.trim();
+  const ppInput = document.getElementById('participle').value.trim();
+  const fbEl = document.getElementById('feedback');
+
+  if (!pastInput || !ppInput) {
+    fbEl.textContent = 'Veuillez remplir les deux champs.';
+    fbEl.className = 'feedback incorrect';
+    return;
+  }
+
+  attempts++;
+
+  const isCorrect =
+    matchesForm(pastInput, currentVerb.past) &&
+    matchesForm(ppInput, currentVerb.past_participle);
+
+  if (isCorrect) {
+    score++;
+    fbEl.textContent = 'Correct ! ✔';
+    fbEl.className = 'feedback correct';
+  } else {
+    fbEl.textContent = `Incorrect... Les réponses étaient : ${currentVerb.past} / ${currentVerb.past_participle}`;
+    fbEl.className = 'feedback incorrect';
+  }
+
+  updateProgress();
+});
+
+// Nouveau
+document.getElementById('newBtn').addEventListener('click', pickNewVerb);
+
+// Reset
+document.getElementById('resetBtn').addEventListener('click', () => {
+  score = 0;
+  attempts = 0;
+  updateProgress();
+  pickNewVerb();
+});
+
+// Initialisation quand le DOM est prêt
+document.addEventListener('DOMContentLoaded', () => {
+  pickNewVerb();
+  updateProgress();
+});
