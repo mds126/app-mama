@@ -174,8 +174,44 @@ function pickNewVerb() {
   document.getElementById('participle').value = "";
   document.getElementById('feedback').textContent = "";
   document.getElementById('feedback').className = 'feedback';
-}  // reset inputs and feedback...
 }
+  // reset inputs and feedback...
+function matchesForm(input, correct) {
+  return correct
+    .toLowerCase()
+    .split('/')
+    .some(form => form.trim() === input.toLowerCase());
+}
+document.getElementById('validateBtn').addEventListener('click', () => {
+  if (!currentVerb) return;
+
+  const pastInput = document.getElementById('past').value.trim();
+  const ppInput   = document.getElementById('participle').value.trim();
+
+  if (!pastInput || !ppInput) {
+    document.getElementById('feedback').textContent = "Veuillez remplir les deux champs.";
+    document.getElementById('feedback').className = 'feedback incorrect';
+    return;
+  }
+
+  attempts++;
+
+  const isCorrect =
+    matchesForm(pastInput, currentVerb.past) &&
+    matchesForm(ppInput, currentVerb.past_participle);
+
+  if (isCorrect) {
+    score++;
+    document.getElementById('feedback').textContent = "Correct ! ✔";
+    document.getElementById('feedback').className = 'feedback correct';
+  } else {
+    document.getElementById('feedback').textContent =
+      `Incorrect... Les réponses étaient : ${currentVerb.past} / ${currentVerb.past_participle}`;
+    document.getElementById('feedback').className = 'feedback incorrect';
+  }
+
+  updateProgress();
+});
   // Réinitialiser les champs et le message pour la nouvelle question
   document.getElementById('past').value = "";
   document.getElementById('participle').value = "";
@@ -206,11 +242,7 @@ document.getElementById('validateBtn').addEventListener('click', () => {
   // Mettre à jour le nombre de tentatives
   attempts++;
   // Vérifier la réponse (insensible à la casse)
-   function matchesForm(input, correct) {
-  return correct.toLowerCase()
-    .split('/')
-    .some(form => form.trim() === input.toLowerCase());
-}
+
   const isCorrect =
   matchesForm(pastInput, currentVerb.past) &&
   matchesForm(ppInput, currentVerb.past_participle);
