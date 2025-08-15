@@ -12,8 +12,15 @@
   </script>
 </head>
 <body>
-  <!-- Paste your FULL quiz HTML here -->
+  <div class="container">
+    <h1>Quiz – Irregular Verbs</h1>
 
+    <div class="field-group">
+      <label for="pseudo">Pseudo :</label>
+      <input type="text" id="pseudo" placeholder="Entrez votre pseudo">
+    </div>
+
+    <form id="quiz-form">
       <!-- Example question block -->
       <div class="question">
         <label>1. To go :</label>
@@ -35,13 +42,14 @@
 
       <!-- Add as many question blocks as you need -->
 
-      <button type="submit" id="submit">Valider</button>
+      <div class="buttons">
+        <button type="submit" id="submit">Valider</button>
+      </div>
     </form>
 
     <div id="result"></div>
   </div>
 
-  
   <script src="./app.js"></script>
 </body>
 </html>
