@@ -10,7 +10,6 @@
   <main class="container">
     <header class="header">
       <h1>Irregular Verbs Quiz</h1>
-
       <label class="toggle">
         <input type="checkbox" id="revisionToggle" />
         <span>Mode révision</span>
@@ -18,13 +17,13 @@
     </header>
 
     <section class="progress-wrap">
-      <div class="progress" aria-label="Progression">
+      <div class="progress">
         <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
       </div>
       <div id="progress-text" class="progress-text">0 / 0 (0%)</div>
     </section>
 
-    <section class="card" aria-live="polite">
+    <section class="card">
       <div class="row">
         <div class="col">
           <div class="label">Verbe de base</div>
@@ -48,18 +47,17 @@
         </label>
       </div>
 
-      <div id="feedback" class="feedback" role="status"></div>
+      <div id="feedback" class="feedback"></div>
 
       <div class="actions">
         <button id="validateBtn" class="btn primary">Valider</button>
-        <button id="showAnswerBtn" class="btn ghost" hidden>Afficher la réponse</button>
         <button id="newBtn" class="btn">Nouveau</button>
         <button id="resetBtn" class="btn danger">Reset</button>
       </div>
     </section>
 
     <footer class="tip">
-      Astuce: plusieurs formes sont acceptées (ex: dreamt/dreamed). Écrivez l’une d’elles.
+      Astuce : plusieurs formes sont acceptées (ex: dreamt/dreamed). Écrivez l’une d’elles.
     </footer>
   </main>
 
