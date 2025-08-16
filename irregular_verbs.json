@@ -1,6 +1,4 @@
-// ===== Quiz Verbes Irréguliers =====
 
-// Liste complète
 const verbs = [
   {"infinitive":"arise","past":"arose","past_participle":"arisen","fr":"survenir"},
   {"infinitive":"awake","past":"awoke","past_participle":"awoken","fr":"se réveiller"},
