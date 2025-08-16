@@ -247,3 +247,14 @@ window.addEventListener('load', () => {
 
 // Optionnel: base API si nécessaire (non utilisé ici)
 // const API_BASE = "https://verbsquiz.onrender.com";
+let revisionMode = true; // or set by toggle
+
+function handleAnswer(selectedOption, correctOption) {
+  if (revisionMode) {
+    // Reveal the correct answer and explanation right away
+    showFeedback(selectedOption, correctOption);
+  } else {
+    // Normal quiz logic with scoring
+    updateScore(selectedOption === correctOption);
+  }
+}
