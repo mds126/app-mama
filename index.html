@@ -1,66 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Irregular Verbs Quiz</title>
-  <link rel="stylesheet" href="./style.css" />
+  <meta charset="UTF-8">
+  <title>Quiz Verbes Irréguliers</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    h1 { text-align: center; }
+    label { display: block; margin-top: 10px; }
+    input[type="text"] { width: 100%; padding: 6px; margin-top: 5px; }
+    .feedback { margin-top: 10px; font-weight: bold; }
+    .feedback.correct { color: green; }
+    .feedback.incorrect { color: red; }
+    .feedback.note { color: #555; }
+    .ok { border: 2px solid green; }
+    .ko { border: 2px solid red; }
+    .progress-container { margin-top: 20px; background: #eee; border-radius: 5px; overflow: hidden; height: 20px; }
+    .progress-bar { background: #4caf50; height: 100%; width: 0%; transition: width 0.3s; }
+    .controls { margin-top: 15px; }
+    .controls button { margin-right: 10px; padding: 6px 12px; }
+  </style>
 </head>
 <body>
-  <main class="container">
-    <header class="header">
-      <h1>Irregular Verbs Quiz</h1>
-      <label class="toggle">
-        <input type="checkbox" id="revisionToggle" />
-        <span>Mode révision</span>
-      </label>
-    </header>
+  <h1>Quiz sur les verbes irréguliers</h1>
 
-    <section class="progress-wrap">
-      <div class="progress">
-        <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
-      </div>
-      <div id="progress-text" class="progress-text">0 / 0 (0%)</div>
-    </section>
+  <p><strong>Base verb:</strong> <span id="base-verb"></span></p>
+  <p><strong>Traduction:</strong> <span id="french-translation"></span></p>
 
-    <section class="card">
-      <div class="row">
-        <div class="col">
-          <div class="label">Verbe de base</div>
-          <div id="base-verb" class="value">—</div>
-        </div>
-        <div class="col">
-          <div class="label">Traduction</div>
-          <div id="french-translation" class="value dim">—</div>
-        </div>
-      </div>
+  <label>Prétérit:
+    <input type="text" id="past">
+  </label>
+  <label>Participe passé:
+    <input type="text" id="participle">
+  </label>
 
-      <div class="inputs">
-        <label class="input-block">
-          <span class="label">Prétérit</span>
-          <input id="past" type="text" autocomplete="off" placeholder="ex: went" />
-        </label>
+  <div id="feedback" class="feedback"></div>
 
-        <label class="input-block">
-          <span class="label">Participe passé</span>
-          <input id="participle" type="text" autocomplete="off" placeholder="ex: gone" />
-        </label>
-      </div>
+  <div class="progress-container">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+  <p id="progress-text"></p>
 
-      <div id="feedback" class="feedback"></div>
+  <div class="controls">
+    <button id="validateBtn">Valider</button>
+    <button id="newBtn">Nouveau</button>
+    <button id="resetBtn">Réinitialiser</button>
+    <label><input type="checkbox" id="revisionToggle"> Mode révision</label>
+  </div>
 
-      <div class="actions">
-        <button id="validateBtn" class="btn primary">Valider</button>
-        <button id="newBtn" class="btn">Nouveau</button>
-        <button id="resetBtn" class="btn danger">Reset</button>
-      </div>
-    </section>
-
-    <footer class="tip">
-      Astuce : plusieurs formes sont acceptées (ex: dreamt/dreamed). Écrivez l’une d’elles.
-    </footer>
-  </main>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
