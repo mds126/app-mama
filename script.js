@@ -1,8 +1,5 @@
 // ===== Quiz Verbes Irréguliers =====
 
-// Liste importée depuis ton tableau
-const verbs =// ===== Quiz Verbes Irréguliers =====
-
 // Liste complète
 const verbs = [
   {"infinitive":"arise","past":"arose","past_participle":"arisen","fr":"survenir"},
@@ -78,8 +75,8 @@ const verbs = [
   {"infinitive":"lend","past":"lent","past_participle":"lent","fr":"prêter"},
   {"infinitive":"let","past":"let","past_participle":"let","fr":"laisser / permettre"},
   {"infinitive":"lie","past":"lay","past_participle":"lain","fr":"être couché"},
-  {"infinitive":"light","past":"lit/lighted","past_participle":"lit"},
-    ];
+  {"infinitive":"light","past":"lit/lighted","past_participle":"lit/lighted","fr":"allumer"},
+  ];
 
 let currentVerb = null;
 let score = 0;
