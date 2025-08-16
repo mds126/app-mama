@@ -1,5 +1,3 @@
-// ===== Quiz Verbes Irréguliers =====
-
 let verbs = [];
 let currentVerb = null;
 let score = 0;
@@ -11,7 +9,7 @@ const $past = el('past');
 const $pp = el('participle');
 const $feedback = el('feedback');
 
-// Charger la liste depuis un fichier JSON
+// Charger la liste depuis le JSON
 fetch('irregular_verbs.json')
   .then(res => res.json())
   .then(data => {
@@ -66,6 +64,7 @@ function setFieldStatus(inputEl, ok) {
   if (ok === true) inputEl.classList.add('ok');
   if (ok === false) inputEl.classList.add('ko');
 }
+
 function clearFieldStatus() {
   $past.classList.remove('ok', 'ko');
   $pp.classList.remove('ok', 'ko');
@@ -76,6 +75,7 @@ function setFeedback(text, kind) {
   $feedback.className = 'feedback' + (kind ? ' ' + kind : '');
 }
 
+// Boutons
 el('validateBtn').addEventListener('click', () => {
   if (!currentVerb) return;
 
