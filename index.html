@@ -1,52 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz Verbes Irréguliers</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
-    h1 { text-align: center; }
-    label { display: block; margin-top: 10px; }
-    input[type="text"] { width: 100%; padding: 6px; margin-top: 5px; }
-    .feedback { margin-top: 10px; font-weight: bold; }
-    .feedback.correct { color: green; }
-    .feedback.incorrect { color: red; }
-    .feedback.note { color: #555; }
-    .ok { border: 2px solid green; }
-    .ko { border: 2px solid red; }
-    .progress-container { margin-top: 20px; background: #eee; border-radius: 5px; overflow: hidden; height: 20px; }
-    .progress-bar { background: #4caf50; height: 100%; width: 0%; transition: width 0.3s; }
-    .controls { margin-top: 15px; }
-    .controls button { margin-right: 10px; padding: 6px 12px; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz — Verbes irréguliers</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <h1>Quiz sur les verbes irréguliers</h1>
+  <noscript>
+    <div class="noscript">Veuillez activer JavaScript pour utiliser ce quiz.</div>
+  </noscript>
 
-  <p><strong>Base verb:</strong> <span id="base-verb"></span></p>
-  <p><strong>Traduction:</strong> <span id="french-translation"></span></p>
+  <main class="app" role="main">
+    <header class="header">
+      <h1>Quiz — Verbes irréguliers</h1>
+      <p class="subtitle">Prétérit et participe passé, avec mode révision</p>
+    </header>
 
-  <label>Prétérit:
-    <input type="text" id="past">
-  </label>
-  <label>Participe passé:
-    <input type="text" id="participle">
-  </label>
+    <section class="card" aria-labelledby="quiz-title">
+      <h2 id="quiz-title" class="sr-only">Carte de quiz</h2>
 
-  <div id="feedback" class="feedback"></div>
+      <div class="row">
+        <p class="label">Verbe de base</p>
+        <p id="base-verb" class="value skeleton" aria-live="polite" aria-atomic="true">—</p>
+      </div>
 
-  <div class="progress-container">
-    <div id="progress-bar" class="progress-bar"></div>
-  </div>
-  <p id="progress-text"></p>
+      <div class="row">
+        <p class="label">Traduction</p>
+        <p id="french-translation" class="value dim skeleton" aria-live="polite" aria-atomic="true">—</p>
+      </div>
 
-  <div class="controls">
-    <button id="validateBtn">Valider</button>
-    <button id="newBtn">Nouveau</button>
-    <button id="resetBtn">Réinitialiser</button>
-    <label><input type="checkbox" id="revisionToggle"> Mode révision</label>
-  </div>
+      <div class="inputs">
+        <label for="past" class="input-label">Prétérit</label>
+        <input id="past" type="text" inputmode="text" autocomplete="off" placeholder="ex : went" />
 
-  <script src="script.js"></script>
+        <label for="participle" class="input-label">Participe passé</label>
+        <input id="participle" type="text" inputmode="text" autocomplete="off" placeholder="ex : gone" />
+      </div>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+      <div class="progress" aria-hidden="true">
+        <div id="progress-bar" class="bar"></div>
+      </div>
+      <div class="progress-meta">
+        <span id="progress-text">0 / 0 (0%)</span>
+        <span id="total-count" class="muted">Total : —</span>
+      </div>
+
+      <div class="controls">
+        <button id="validateBtn" class="btn primary" disabled>Valider</button>
+        <button id="newBtn" class="btn" disabled>Nouveau</button>
+        <button id="resetBtn" class="btn" disabled>Réinitialiser</button>
+        <label class="toggle">
+          <input type="checkbox" id="revisionToggle" disabled />
+          <span>Mode révision</span>
+        </label>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="hint">
+        Raccourcis : Entrée = valider • Ctrl+N = nouveau • Ctrl+R = réinitialiser
+      </p>
+    </footer>
+  </main>
 </body>
 </html>
