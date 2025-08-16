@@ -2,55 +2,67 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>Quiz des verbes irréguliers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="./style.css">
+  <title>Irregular Verbs Quiz</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <main class="container">
-    <h1>Quiz des verbes irréguliers</h1>
+    <header class="header">
+      <h1>Irregular Verbs Quiz</h1>
 
-    <!-- Zone d'affichage du verbe -->
-    <section class="question">
-      <p>
-        <span class="label">Base verbale :</span>
-        <span id="base-verb" class="value">—</span>
-      </p>
-      <p>
-        <span class="label">Traduction (FR) :</span>
-        <span id="french-translation" class="value">—</span>
-      </p>
-    </section>
+      <label class="toggle">
+        <input type="checkbox" id="revisionToggle" />
+        <span>Mode révision</span>
+      </label>
+    </header>
 
-    <!-- Champs de saisie -->
-    <section class="answers">
-      <div class="field-group">
-        <label for="past">Prétérit</label>
-        <input id="past" type="text" placeholder="ex: went" autocomplete="off" />
+    <section class="progress-wrap">
+      <div class="progress" aria-label="Progression">
+        <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
       </div>
-      <div class="field-group">
-        <label for="participle">Participe passé</label>
-        <input id="participle" type="text" placeholder="ex: gone" autocomplete="off" />
+      <div id="progress-text" class="progress-text">0 / 0 (0%)</div>
+    </section>
+
+    <section class="card" aria-live="polite">
+      <div class="row">
+        <div class="col">
+          <div class="label">Verbe de base</div>
+          <div id="base-verb" class="value">—</div>
+        </div>
+        <div class="col">
+          <div class="label">Traduction</div>
+          <div id="french-translation" class="value dim">—</div>
+        </div>
+      </div>
+
+      <div class="inputs">
+        <label class="input-block">
+          <span class="label">Prétérit</span>
+          <input id="past" type="text" autocomplete="off" placeholder="ex: went" />
+        </label>
+
+        <label class="input-block">
+          <span class="label">Participe passé</span>
+          <input id="participle" type="text" autocomplete="off" placeholder="ex: gone" />
+        </label>
+      </div>
+
+      <div id="feedback" class="feedback" role="status"></div>
+
+      <div class="actions">
+        <button id="validateBtn" class="btn primary">Valider</button>
+        <button id="showAnswerBtn" class="btn ghost" hidden>Afficher la réponse</button>
+        <button id="newBtn" class="btn">Nouveau</button>
+        <button id="resetBtn" class="btn danger">Reset</button>
       </div>
     </section>
 
-    <!-- Boutons d'action -->
-    <section class="buttons">
-      <button id="validateBtn" type="button">Valider</button>
-      <button id="newBtn" type="button">Nouveau</button>
-      <button id="resetBtn" type="button">Réinitialiser</button>
-    </section>
-
-    <!-- Barre de progression -->
-    <section class="progress-container">
-      <div class="progress-bar" id="progress-bar"></div>
-    </section>
-    <div id="progress-text">0 / 0 (0%)</div>
-
-    <!-- Message de feedback -->
-    <p id="feedback" class="feedback"></p>
+    <footer class="tip">
+      Astuce: plusieurs formes sont acceptées (ex: dreamt/dreamed). Écrivez l’une d’elles.
+    </footer>
   </main>
 
-  <script src="./app.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
