@@ -1,5 +1,4 @@
-
-const verbs = [
+ [
   {"infinitive":"arise","past":"arose","past_participle":"arisen","fr":"survenir"},
   {"infinitive":"awake","past":"awoke","past_participle":"awoken","fr":"se réveiller"},
   {"infinitive":"be","past":"was/were","past_participle":"been","fr":"être"},
@@ -74,4 +73,4 @@ const verbs = [
   {"infinitive":"let","past":"let","past_participle":"let","fr":"laisser / permettre"},
   {"infinitive":"lie","past":"lay","past_participle":"lain","fr":"être couché"},
   {"infinitive":"light","past":"lit/lighted","past_participle":"lit/lighted","fr":"allumer"},
-  {"infinitive":"lose","past":"lost","past_participle":"lost","fr
+ ];
