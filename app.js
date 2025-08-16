@@ -162,19 +162,26 @@ const verbs = [
 let currentVerb = null;
 let score = 0;
 let attempts = 0;
+let revisionMode = false; // par défaut: mode normal
+
+// Utilitaires DOM
+const el = id => document.getElementById(id);
+const $past = el('past');
+const $pp = el('participle');
+const $feedback = el('feedback');
 
 // Choisir un nouveau verbe au hasard et réinitialiser les champs
 function pickNewVerb() {
   const randomIndex = Math.floor(Math.random() * verbs.length);
   currentVerb = verbs[randomIndex];
 
-  document.getElementById('base-verb').textContent = currentVerb.infinitive;
-  document.getElementById('french-translation').textContent = currentVerb.fr;
+  el('base-verb').textContent = currentVerb.infinitive;
+  el('french-translation').textContent = currentVerb.fr;
 
-  document.getElementById('past').value = '';
-  document.getElementById('participle').value = '';
-  document.getElementById('feedback').textContent = '';
-  document.getElementById('feedback').className = 'feedback';
+  $past.value = '';
+  $pp.value = '';
+  clearFieldStatus();
+  setFeedback('', ''); // reset
 }
 
 // Vérifie qu’une saisie correspond à l’une des formes possibles (séparées par /)
@@ -189,21 +196,65 @@ function matchesForm(input, correct) {
 
 // Mettre à jour la barre de progression et le texte
 function updateProgress() {
+  if (revisionMode) {
+    el('progress-text').textContent = 'Mode révision — pas de score';
+    el('progress-bar').style.width = '0%';
+    return;
+  }
   const percent = attempts > 0 ? Math.round((score / attempts) * 100) : 0;
-  document.getElementById('progress-text').textContent = `${score} / ${attempts} (${percent}%)`;
-  document.getElementById('progress-bar').style.width = percent + '%';
+  el('progress-text').textContent = `${score} / ${attempts} (${percent}%)`;
+  el('progress-bar').style.width = percent + '%';
 }
 
-// Événement du bouton Valider (vérifier la réponse)
-document.getElementById('validateBtn').addEventListener('click', () => {
+// Appliquer un retour visuel aux champs
+function setFieldStatus(inputEl, ok) {
+  inputEl.classList.remove('ok', 'ko');
+  if (ok === true) inputEl.classList.add('ok');
+  if (ok === false) inputEl.classList.add('ko');
+}
+function clearFieldStatus() {
+  $past.classList.remove('ok', 'ko');
+  $pp.classList.remove('ok', 'ko');
+}
+
+// Définir le message de feedback
+function setFeedback(text, kind) {
+  $feedback.textContent = text || '';
+  $feedback.className = 'feedback' + (kind ? ' ' + kind : '');
+}
+
+// Afficher le feedback (complet en mode révision)
+function showFeedbackInRevision() {
+  const pastOK = matchesForm($past.value, currentVerb.past);
+  const ppOK = matchesForm($pp.value, currentVerb.past_participle);
+
+  setFieldStatus($past, pastOK);
+  setFieldStatus($pp, ppOK);
+
+  const answer = `${currentVerb.past} / ${currentVerb.past_participle}`;
+  if ($past.value || $pp.value) {
+    setFeedback(`Révision: ${pastOK && ppOK ? '✅ Bien joué' : 'ℹ️ Réponse'} — ${answer}`, pastOK && ppOK ? 'correct' : 'note');
+  } else {
+    setFeedback(`Réponse: ${answer}`, 'note');
+  }
+}
+
+// Gestion du bouton Valider
+el('validateBtn').addEventListener('click', () => {
   if (!currentVerb) return;
 
-  const pastInput = document.getElementById('past').value.trim();
-  const ppInput = document.getElementById('participle').value.trim();
+  const pastInput = $past.value.trim();
+  const ppInput = $pp.value.trim();
+
+  if (revisionMode) {
+    showFeedbackInRevision();
+    // Avance automatique pour un rythme fluide
+    setTimeout(() => { pickNewVerb(); setFeedback('', ''); }, 1200);
+    return;
+  }
 
   if (!pastInput || !ppInput) {
-    document.getElementById('feedback').textContent = 'Veuillez remplir les deux champs.';
-    document.getElementById('feedback').className = 'feedback incorrect';
+    setFeedback('Veuillez remplir les deux champs.', 'incorrect');
     return;
   }
 
@@ -215,46 +266,62 @@ document.getElementById('validateBtn').addEventListener('click', () => {
 
   if (isCorrect) {
     score++;
-    document.getElementById('feedback').textContent = 'Correct ! ✔';
-    document.getElementById('feedback').className = 'feedback correct';
+    setFeedback('Correct ! ✔', 'correct');
+    setFieldStatus($past, true);
+    setFieldStatus($pp, true);
   } else {
-    document.getElementById('feedback').textContent =
-      `Incorrect... Les réponses étaient : ${currentVerb.past} / ${currentVerb.past_participle}`;
-    document.getElementById('feedback').className = 'feedback incorrect';
+    setFeedback(`Incorrect... Les réponses étaient : ${currentVerb.past} / ${currentVerb.past_participle}`, 'incorrect');
+    setFieldStatus($past, matchesForm(pastInput, currentVerb.past));
+    setFieldStatus($pp, matchesForm(ppInput, currentVerb.past_participle));
   }
 
   updateProgress();
 });
 
-// Événement du bouton Nouveau (passer à une nouvelle question)
-document.getElementById('newBtn').addEventListener('click', () => {
-  pickNewVerb();
+// Bouton Afficher la réponse (visible en mode révision)
+el('showAnswerBtn').addEventListener('click', () => {
+  if (!currentVerb) return;
+  $past.value = currentVerb.past;
+  $pp.value = currentVerb.past_participle;
+  showFeedbackInRevision();
 });
 
-// Événement du bouton Reset (réinitialiser le quiz)
-document.getElementById('resetBtn').addEventListener('click', () => {
+// Bouton Nouveau
+el('newBtn').addEventListener('click', () => {
+  pickNewVerb();
+  setFeedback('', '');
+});
+
+// Bouton Reset
+el('resetBtn').addEventListener('click', () => {
   score = 0;
   attempts = 0;
   updateProgress();
   pickNewVerb();
 });
 
-// Initialiser le premier verbe au chargement de la page
+// Toggle mode révision
+el('revisionToggle').addEventListener('change', e => {
+  revisionMode = e.target.checked;
+  document.body.classList.toggle('revision-active', revisionMode);
+
+  // En révision: pas de score
+  if (revisionMode) {
+    setFeedback('Mode révision activé — pas de score.', 'note');
+  } else {
+    setFeedback('Mode révision désactivé — retour au quiz.', 'note');
+  }
+  updateProgress();
+
+  // Bouton "Afficher la réponse"
+  el('showAnswerBtn').hidden = !revisionMode;
+
+  // Nettoyage visuel
+  clearFieldStatus();
+});
+
+// Initialisation
 window.addEventListener('load', () => {
   pickNewVerb();
   updateProgress();
 });
-
-// Optionnel: base API si nécessaire (non utilisé ici)
-// const API_BASE = "https://verbsquiz.onrender.com";
-let revisionMode = true; // or set by toggle
-
-function handleAnswer(selectedOption, correctOption) {
-  if (revisionMode) {
-    // Reveal the correct answer and explanation right away
-    showFeedback(selectedOption, correctOption);
-  } else {
-    // Normal quiz logic with scoring
-    updateScore(selectedOption === correctOption);
-  }
-}
