@@ -1,327 +1,60 @@
-// Liste des verbes irréguliers (base, prétérit, participe passé)
 const verbs = [
-  {"infinitive":"arise","past":"arose","past_participle":"arisen","fr":"survenir"},
-  {"infinitive":"awake","past":"awoke","past_participle":"awoken","fr":"se réveiller"},
-  {"infinitive":"be","past":"was/were","past_participle":"been","fr":"être"},
-  {"infinitive":"bear","past":"bore","past_participle":"borne","fr":"supporter / porter"},
-  {"infinitive":"beat","past":"beat","past_participle":"beaten","fr":"battre"},
-  {"infinitive":"become","past":"became","past_participle":"become","fr":"devenir"},
-  {"infinitive":"begin","past":"began","past_participle":"begun","fr":"commencer"},
-  {"infinitive":"bend","past":"bent","past_participle":"bent","fr":"plier"},
-  {"infinitive":"bet","past":"bet","past_participle":"bet","fr":"parier"},
-  {"infinitive":"bid","past":"bid","past_participle":"bid","fr":"enchérir"},
-  {"infinitive":"bite","past":"bit","past_participle":"bitten","fr":"mordre"},
-  {"infinitive":"bleed","past":"bled","past_participle":"bled","fr":"saigner"},
-  {"infinitive":"blow","past":"blew","past_participle":"blown","fr":"souffler"},
-  {"infinitive":"break","past":"broke","past_participle":"broken","fr":"casser"},
-  {"infinitive":"breed","past":"bred","past_participle":"bred","fr":"élever (animaux)"},
-  {"infinitive":"bring","past":"brought","past_participle":"brought","fr":"apporter"},
-  {"infinitive":"broadcast","past":"broadcast","past_participle":"broadcast","fr":"diffuser"},
-  {"infinitive":"build","past":"built","past_participle":"built","fr":"construire"},
-  {"infinitive":"burn","past":"burnt/burned","past_participle":"burnt/burned","fr":"brûler"},
-  {"infinitive":"burst","past":"burst","past_participle":"burst","fr":"éclater"},
-  {"infinitive":"buy","past":"bought","past_participle":"bought","fr":"acheter"},
-  {"infinitive":"cast","past":"cast","past_participle":"cast","fr":"jeter / distribuer rôles"},
-  {"infinitive":"catch","past":"caught","past_participle":"caught","fr":"attraper"},
-  {"infinitive":"choose","past":"chose","past_participle":"chosen","fr":"choisir"},
-  {"infinitive":"cling","past":"clung","past_participle":"clung","fr":"s'accrocher"},
-  {"infinitive":"come","past":"came","past_participle":"come","fr":"venir"},
-  {"infinitive":"cost","past":"cost","past_participle":"cost","fr":"coûter"},
-  {"infinitive":"creep","past":"crept","past_participle":"crept","fr":"ramper"},
-  {"infinitive":"cut","past":"cut","past_participle":"cut","fr":"couper"},
-  {"infinitive":"deal","past":"dealt","past_participle":"dealt","fr":"distribuer / traiter"},
-  {"infinitive":"dig","past":"dug","past_participle":"dug","fr":"creuser"},
-  {"infinitive":"do","past":"did","past_participle":"done","fr":"faire"},
-  {"infinitive":"draw","past":"drew","past_participle":"drawn","fr":"dessiner / tirer"},
-  {"infinitive":"dream","past":"dreamt/dreamed","past_participle":"dreamt/dreamed","fr":"rêver"},
-  {"infinitive":"drink","past":"drank","past_participle":"drunk","fr":"boire"},
-  {"infinitive":"drive","past":"drove","past_participle":"driven","fr":"conduire"},
-  {"infinitive":"eat","past":"ate","past_participle":"eaten","fr":"manger"},
-  {"infinitive":"fall","past":"fell","past_participle":"fallen","fr":"tomber"},
-  {"infinitive":"feed","past":"fed","past_participle":"fed","fr":"nourrir"},
-  {"infinitive":"feel","past":"felt","past_participle":"felt","fr":"ressentir"},
-  {"infinitive":"fight","past":"fought","past_participle":"fought","fr":"se battre"},
-  {"infinitive":"find","past":"found","past_participle":"found","fr":"trouver"},
-  {"infinitive":"fit","past":"fit/fitted","past_participle":"fit/fitted","fr":"ajuster / convenir"},
-  {"infinitive":"fly","past":"flew","past_participle":"flown","fr":"voler (air)"},
-  {"infinitive":"forbid","past":"forbade","past_participle":"forbidden","fr":"interdire"},
-  {"infinitive":"forget","past":"forgot","past_participle":"forgotten","fr":"oublier"},
-  {"infinitive":"forgive","past":"forgave","past_participle":"forgiven","fr":"pardonner"},
-  {"infinitive":"freeze","past":"froze","past_participle":"frozen","fr":"geler"},
-  {"infinitive":"get","past":"got","past_participle":"got/gotten","fr":"obtenir / devenir"},
-  {"infinitive":"give","past":"gave","past_participle":"given","fr":"donner"},
-  {"infinitive":"go","past":"went","past_participle":"gone","fr":"aller"},
-  {"infinitive":"grind","past":"ground","past_participle":"ground","fr":"moudre"},
-  {"infinitive":"grow","past":"grew","past_participle":"grown","fr":"grandir / cultiver"},
-  {"infinitive":"hang","past":"hung","past_participle":"hung","fr":"pendre / accrocher"},
-  {"infinitive":"have","past":"had","past_participle":"had","fr":"avoir"},
-  {"infinitive":"hear","past":"heard","past_participle":"heard","fr":"entendre"},
-  {"infinitive":"hide","past":"hid","past_participle":"hidden","fr":"cacher"},
-  {"infinitive":"hit","past":"hit","past_participle":"hit","fr":"frapper"},
-  {"infinitive":"hold","past":"held","past_participle":"held","fr":"tenir"},
-  {"infinitive":"hurt","past":"hurt","past_participle":"hurt","fr":"blesser"},
-  {"infinitive":"keep","past":"kept","past_participle":"kept","fr":"garder"},
-  {"infinitive":"kneel","past":"knelt/kneeled","past_participle":"knelt/kneeled","fr":"s'agenouiller"},
-  {"infinitive":"knit","past":"knit/knitted","past_participle":"knit/knitted","fr":"tricoter"},
-  {"infinitive":"know","past":"knew","past_participle":"known","fr":"savoir / connaître"},
-  {"infinitive":"lay","past":"laid","past_participle":"laid","fr":"poser / pondre"},
-  {"infinitive":"lead","past":"led","past_participle":"led","fr":"mener / conduire"},
-  {"infinitive":"lean","past":"leant/leaned","past_participle":"leant/leaned","fr":"se pencher"},
-  {"infinitive":"leap","past":"leapt/leaped","past_participle":"leapt/leaped","fr":"bondir"},
-  {"infinitive":"learn","past":"learnt/learned","past_participle":"learnt/learned","fr":"apprendre"},
-  {"infinitive":"leave","past":"left","past_participle":"left","fr":"quitter / laisser"},
-  {"infinitive":"lend","past":"lent","past_participle":"lent","fr":"prêter"},
-  {"infinitive":"let","past":"let","past_participle":"let","fr":"laisser / permettre"},
-  {"infinitive":"lie","past":"lay","past_participle":"lain","fr":"être couché"},
-  {"infinitive":"light","past":"lit/lighted","past_participle":"lit/lighted","fr":"allumer"},
-  {"infinitive":"lose","past":"lost","past_participle":"lost","fr":"perdre"},
-  {"infinitive":"make","past":"made","past_participle":"made","fr":"faire / fabriquer"},
-  {"infinitive":"mean","past":"meant","past_participle":"meant","fr":"vouloir dire"},
-  {"infinitive":"meet","past":"met","past_participle":"met","fr":"rencontrer"},
-  {"infinitive":"mow","past":"mowed","past_participle":"mown/mowed","fr":"tondre"},
-  {"infinitive":"overcome","past":"overcame","past_participle":"overcome","fr":"surmonter"},
-  {"infinitive":"pay","past":"paid","past_participle":"paid","fr":"payer"},
-  {"infinitive":"put","past":"put","past_participle":"put","fr":"mettre"},
-  {"infinitive":"quit","past":"quit","past_participle":"quit","fr":"quitter / arrêter"},
-  {"infinitive":"read","past":"read","past_participle":"read","fr":"lire"},
-  {"infinitive":"ride","past":"rode","past_participle":"ridden","fr":"monter (à cheval, vélo)"},
-  {"infinitive":"ring","past":"rang","past_participle":"rung","fr":"sonner"},
-  {"infinitive":"rise","past":"rose","past_participle":"risen","fr":"s'élever"},
-  {"infinitive":"run","past":"ran","past_participle":"run","fr":"courir"},
-  {"infinitive":"saw","past":"sawed","past_participle":"sawn/sawed","fr":"scier"},
-  {"infinitive":"say","past":"said","past_participle":"said","fr":"dire"},
-  {"infinitive":"see","past":"saw","past_participle":"seen","fr":"voir"},
-  {"infinitive":"seek","past":"sought","past_participle":"sought","fr":"chercher"},
-  {"infinitive":"sell","past":"sold","past_participle":"sold","fr":"vendre"},
-  {"infinitive":"send","past":"sent","past_participle":"sent","fr":"envoyer"},
-  {"infinitive":"set","past":"set","past_participle":"set","fr":"placer / fixer"},
-  {"infinitive":"sew","past":"sewed","past_participle":"sewn/sewed","fr":"coudre"},
-  {"infinitive":"shake","past":"shook","past_participle":"shaken","fr":"secouer"},
-  {"infinitive":"shear","past":"sheared","past_participle":"shorn/sheared","fr":"tondre (mouton)"},
-  {"infinitive":"shine","past":"shone","past_participle":"shone","fr":"briller"},
-  {"infinitive":"shoot","past":"shot","past_participle":"shot","fr":"tirer (arme)"},
-  {"infinitive":"show","past":"showed","past_participle":"shown/showed","fr":"montrer"},
-  {"infinitive":"shrink","past":"shrank","past_participle":"shrunk","fr":"rétrécir"},
-  {"infinitive":"shut","past":"shut","past_participle":"shut","fr":"fermer"},
-  {"infinitive":"sing","past":"sang","past_participle":"sung","fr":"chanter"},
-  {"infinitive":"sink","past":"sank","past_participle":"sunk","fr":"couler"},
-  {"infinitive":"sit","past":"sat","past_participle":"sat","fr":"s'asseoir"},
-  {"infinitive":"sleep","past":"slept","past_participle":"slept","fr":"dormir"},
-  {"infinitive":"slide","past":"slid","past_participle":"slid","fr":"glisser"},
-  {"infinitive":"sling","past":"slung","past_participle":"slung","fr":"lancer / jeter"},
-  {"infinitive":"smell","past":"smelt/smelled","past_participle":"smelt/smelled","fr":"sentir (odeur)"},
-  {"infinitive":"sow","past":"sowed","past_participle":"sown/sowed","fr":"semer"},
-  {"infinitive":"speak","past":"spoke","past_participle":"spoken","fr":"parler"},
-  {"infinitive":"speed","past":"sped","past_participle":"sped","fr":"aller vite"},
-  {"infinitive":"spell","past":"spelt/spelled","past_participle":"spelt/spelled","fr":"épeler"},
-  {"infinitive":"spend","past":"spent","past_participle":"spent","fr":"dépenser / passer (temps)"},
-  {"infinitive":"spill","past":"spilt/spilled","past_participle":"spilt/spilled","fr":"renverser"},
-  {"infinitive":"spin","past":"spun","past_participle":"spun","fr":"filer (laine)"},
-  {"infinitive":"spit","past":"spat","past_participle":"spat","fr":"cracher"},
-  {"infinitive":"split","past":"split","past_participle":"split","fr":"fendre / diviser"},
-  {"infinitive":"spoil","past":"spoilt/spoiled","past_participle":"spoilt/spoiled","fr":"gâcher"},
-  {"infinitive":"spread","past":"spread","past_participle":"spread","fr":"répandre / étaler"},
-  {"infinitive":"spring","past":"sprang","past_participle":"sprung","fr":"jaillir / bondir"},
-  {"infinitive":"stand","past":"stood","past_participle":"stood","fr":"se tenir debout"},
-  {"infinitive":"steal","past":"stole","past_participle":"stolen","fr":"voler (dérober)"},
-  {"infinitive":"stick","past":"stuck","past_participle":"stuck","fr":"coller"},
-  {"infinitive":"sting","past":"stung","past_participle":"stung","fr":"piquer"},
-  {"infinitive":"stink","past":"stank","past_participle":"stunk","fr":"puer"},
-  {"infinitive":"stride","past":"strode","past_participle":"stridden","fr":"marcher à grands pas"},
-  {"infinitive":"strike","past":"struck","past_participle":"struck","fr":"frapper"},
-  {"infinitive":"string","past":"strung","past_participle":"strung","fr":"enfiler / tendre (corde)"},
-  {"infinitive":"swear","past":"swore","past_participle":"sworn","fr":"jurer"},
-  {"infinitive":"sweep","past":"swept","past_participle":"swept","fr":"balayer"},
-  {"infinitive":"swell","past":"swelled","past_participle":"swollen/swelled","fr":"gonfler"},
-  {"infinitive":"swim","past":"swam","past_participle":"swum","fr":"nager"},
-  {"infinitive":"swing","past":"swung","past_participle":"swung","fr":"se balancer"},
-  {"infinitive":"take","past":"took","past_participle":"taken","fr":"prendre"},
-  {"infinitive":"teach","past":"taught","past_participle":"taught","fr":"enseigner"},
-  {"infinitive":"tear","past":"tore","past_participle":"torn","fr":"déchirer"},
-  {"infinitive":"tell","past":"told","past_participle":"told","fr":"dire / raconter"},
-  {"infinitive":"think","past":"thought","past_participle":"thought","fr":"penser"},
-  {"infinitive":"thrive","past":"throve/thrived","past_participle":"thriven/thrived","fr":"prospérer"},
-  {"infinitive":"throw","past":"threw","past_participle":"thrown","fr":"jeter"},
-  {"infinitive":"thrust","past":"thrust","past_participle":"thrust","fr":"enfoncer / pousser"},
-  {"infinitive":"tread","past":"trod","past_participle":"trodden","fr":"fouler (sol)"},
-  {"infinitive":"understand","past":"understood","past_participle":"understood","fr":"comprendre"},
-  {"infinitive":"undertake","past":"undertook","past_participle":"undertaken","fr":"entreprendre"},
-  {"infinitive":"upset","past":"upset","past_participle":"upset","fr":"contrarier / renverser"},
-  {"infinitive":"wake","past":"woke","past_participle":"woken","fr":"(se) réveiller"},
-  {"infinitive":"wear","past":"wore","past_participle":"worn","fr":"porter (vêtements)"},
-  {"infinitive":"weave","past":"wove","past_participle":"woven","fr":"tisser"},
-  {"infinitive":"weep","past":"wept","past_participle":"wept","fr":"pleurer"},
-  {"infinitive":"win","past":"won","past_participle":"won","fr":"gagner"},
-  {"infinitive":"wind","past":"wound","past_participle":"wound","fr":"enrouler"},
-  {"infinitive":"withdraw","past":"withdrew","past_participle":"withdrawn","fr":"retirer"},
-  {"infinitive":"withstand","past":"withstood","past_participle":"withstood","fr":"résister à"},
-  {"infinitive":"wring","past":"wrung","past_participle":"wrung","fr":"tordre / essorer"},
-  {"infinitive":"write","past":"wrote","past_participle":"written","fr":"écrire"}
+  { infinitive: "arise", past: "arose", past_participle: "arisen", fr: "survenir" },
+  { infinitive: "awake", past: "awoke", past_participle: "awoken", fr: "se réveiller" },
+  { infinitive: "be", past: "was/were", past_participle: "been", fr: "être" },
+  { infinitive: "beat", past: "beat", past_participle: "beaten", fr: "battre" },
+  { infinitive: "become", past: "became", past_participle: "become", fr: "devenir" },
+  { infinitive: "begin", past: "began", past_participle: "begun", fr: "commencer" },
+  { infinitive: "bend", past: "bent", past_participle: "bent", fr: "plier" },
+  { infinitive: "bet", past: "bet", past_participle: "bet", fr: "parier" },
+  { infinitive: "bite", past: "bit", past_participle: "bitten", fr: "mordre" },
+  { infinitive: "blow", past: "blew", past_participle: "blown", fr: "souffler" }
 ];
 
 let currentVerb = null;
 let score = 0;
 let attempts = 0;
-let revisionMode = false; // par défaut: mode normal
+let revisionMode = false;
 
-// Utilitaires DOM
-const el = id => document.getElementById(id);
-const $past = el('past');
-const $pp = el('participle');
-const $feedback = el('feedback');
-
-// Choisir un nouveau verbe au hasard et réinitialiser les champs
 function pickNewVerb() {
   const randomIndex = Math.floor(Math.random() * verbs.length);
   currentVerb = verbs[randomIndex];
 
-  el('base-verb').textContent = currentVerb.infinitive;
-  el('french-translation').textContent = currentVerb.fr;
-
-  $past.value = '';
-  $pp.value = '';
-  clearFieldStatus();
-  setFeedback('', ''); // reset
+  document.getElementById("base-verb").textContent = currentVerb.infinitive;
+  document.getElementById("french-translation").textContent = currentVerb.fr;
+  document.getElementById("past").value = "";
+  document.getElementById("participle").value = "";
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("feedback").className = "feedback";
 }
 
-// Vérifie qu’une saisie correspond à l’une des formes possibles (séparées par /)
 function matchesForm(input, correct) {
-  if (!correct) return false;
-  const user = input.trim().toLowerCase();
   return correct
     .toLowerCase()
-    .split('/')
-    .some(form => form.trim() === user);
+    .split("/")
+    .some((form) => form.trim() === input.toLowerCase());
 }
 
-// Mettre à jour la barre de progression et le texte
 function updateProgress() {
-  if (revisionMode) {
-    el('progress-text').textContent = 'Mode révision — pas de score';
-    el('progress-bar').style.width = '0%';
-    return;
-  }
   const percent = attempts > 0 ? Math.round((score / attempts) * 100) : 0;
-  el('progress-text').textContent = `${score} / ${attempts} (${percent}%)`;
-  el('progress-bar').style.width = percent + '%';
+  document.getElementById("progress-text").textContent = revisionMode
+    ? "Mode révision — pas de score"
+    : `${score} / ${attempts} (${percent}%)`;
+  document.getElementById("progress-bar").style.width = revisionMode
+    ? "0%"
+    : percent + "%";
 }
 
-// Appliquer un retour visuel aux champs
-function setFieldStatus(inputEl, ok) {
-  inputEl.classList.remove('ok', 'ko');
-  if (ok === true) inputEl.classList.add('ok');
-  if (ok === false) inputEl.classList.add('ko');
-}
-function clearFieldStatus() {
-  $past.classList.remove('ok', 'ko');
-  $pp.classList.remove('ok', 'ko');
-}
-
-// Définir le message de feedback
-function setFeedback(text, kind) {
-  $feedback.textContent = text || '';
-  $feedback.className = 'feedback' + (kind ? ' ' + kind : '');
-}
-
-// Afficher le feedback (complet en mode révision)
-function showFeedbackInRevision() {
-  const pastOK = matchesForm($past.value, currentVerb.past);
-  const ppOK = matchesForm($pp.value, currentVerb.past_participle);
-
-  setFieldStatus($past, pastOK);
-  setFieldStatus($pp, ppOK);
-
-  const answer = `${currentVerb.past} / ${currentVerb.past_participle}`;
-  if ($past.value || $pp.value) {
-    setFeedback(`Révision: ${pastOK && ppOK ? '✅ Bien joué' : 'ℹ️ Réponse'} — ${answer}`, pastOK && ppOK ? 'correct' : 'note');
-  } else {
-    setFeedback(`Réponse: ${answer}`, 'note');
-  }
-}
-
-// Gestion du bouton Valider
-el('validateBtn').addEventListener('click', () => {
+document.getElementById("validateBtn").addEventListener("click", () => {
   if (!currentVerb) return;
 
-  const pastInput = $past.value.trim();
-  const ppInput = $pp.value.trim();
+  const pastInput = document.getElementById("past").value.trim();
+  const ppInput = document.getElementById("participle").value.trim();
 
   if (revisionMode) {
-    showFeedbackInRevision();
-    // Avance automatique pour un rythme fluide
-    setTimeout(() => { pickNewVerb(); setFeedback('', ''); }, 1200);
-    return;
-  }
-
-  if (!pastInput || !ppInput) {
-    setFeedback('Veuillez remplir les deux champs.', 'incorrect');
-    return;
-  }
-
-  attempts++;
-
-  const isCorrect =
-    matchesForm(pastInput, currentVerb.past) &&
-    matchesForm(ppInput, currentVerb.past_participle);
-
-  if (isCorrect) {
-    score++;
-    setFeedback('Correct ! ✔', 'correct');
-    setFieldStatus($past, true);
-    setFieldStatus($pp, true);
-  } else {
-    setFeedback(`Incorrect... Les réponses étaient : ${currentVerb.past} / ${currentVerb.past_participle}`, 'incorrect');
-    setFieldStatus($past, matchesForm(pastInput, currentVerb.past));
-    setFieldStatus($pp, matchesForm(ppInput, currentVerb.past_participle));
-  }
-
-  updateProgress();
-});
-
-// Bouton Afficher la réponse (visible en mode révision)
-el('showAnswerBtn').addEventListener('click', () => {
-  if (!currentVerb) return;
-  $past.value = currentVerb.past;
-  $pp.value = currentVerb.past_participle;
-  showFeedbackInRevision();
-});
-
-// Bouton Nouveau
-el('newBtn').addEventListener('click', () => {
-  pickNewVerb();
-  setFeedback('', '');
-});
-
-// Bouton Reset
-el('resetBtn').addEventListener('click', () => {
-  score = 0;
-  attempts = 0;
-  updateProgress();
-  pickNewVerb();
-});
-
-// Toggle mode révision
-el('revisionToggle').addEventListener('change', e => {
-  revisionMode = e.target.checked;
-  document.body.classList.toggle('revision-active', revisionMode);
-
-  // En révision: pas de score
-  if (revisionMode) {
-    setFeedback('Mode révision activé — pas de score.', 'note');
-  } else {
-    setFeedback('Mode révision désactivé — retour au quiz.', 'note');
-  }
-  updateProgress();
-
-  // Bouton "Afficher la réponse"
-  el('showAnswerBtn').hidden = !revisionMode;
-
-  // Nettoyage visuel
-  clearFieldStatus();
-});
-
-// Initialisation
-window.addEventListener('load', () => {
-  pickNewVerb();
-  updateProgress();
-});
+    document.getElementById("past").value = currentVerb.past;
+    document.getElementById("participle").value = currentVerb.past_participle;
+    document.getElementById("feedback").textContent =
+      `Révision : ${currentVerb.past} / ${currentVerb.past_participle}`;
+    document.getElementById("feedback").className = "feedback correct";
+    return
