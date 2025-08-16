@@ -77,6 +77,24 @@ function resetQuiz() {
   updateProgress();
   showVerb();
 }
+function showVerb() {
+  currentVerb = pickRandomVerb();
+  baseVerbEl.textContent = currentVerb.base;
+  frenchEl.textContent = currentVerb.french;
+
+  if (revisionMode) {
+    // Show the answers right away
+    pastInput.value = currentVerb.past.join(" / ");
+    partInput.value = currentVerb.participle.join(" / ");
+    feedbackEl.innerHTML = "📚 Révision : réponses affichées";
+    feedbackEl.style.color = "blue";
+  } else {
+    // Hide the answers, ready for quiz
+    pastInput.value = "";
+    partInput.value = "";
+    feedbackEl.textContent = "";
+  }
+
 
 // Event listeners
 validateBtn.addEventListener("click", checkAnswer);
