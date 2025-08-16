@@ -2,62 +2,23 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Quiz Verbes Irréguliers</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Irregular Verbs Quiz</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="app">
-    <header class="header">
-      <h1>Quiz — Verbes irréguliers</h1>
-      <p class="subtitle">Entraîne-toi au prétérit et au participe passé</p>
-    </header>
+  <h1>Irregular Verbs Quiz</h1>
 
-    <section class="card">
-      <div class="row">
-        <p class="label">Base verb</p>
-        <p id="base-verb" class="value skeleton">—</p>
-      </div>
-      <div class="row">
-        <p class="label">Traduction</p>
-        <p id="french-translation" class="value skeleton">—</p>
-      </div>
+  <div id="quiz">
+    <p id="verb"></p>
 
-      <div class="inputs">
-        <label for="past" class="input-label">Prétérit</label>
-        <input type="text" id="past" autocomplete="off" placeholder="ex: went">
+    <input type="text" id="past" placeholder="Past Simple">
+    <input type="text" id="pastParticiple" placeholder="Past Participle">
 
-        <label for="participle" class="input-label">Participe passé</label>
-        <input type="text" id="participle" autocomplete="off" placeholder="ex: gone">
-      </div>
+    <button id="validateBtn" disabled>Valider</button>
+    <button id="newBtn" disabled>Nouveau mot</button>
 
-      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
-
-      <div class="progress">
-        <div id="progress-bar" class="bar"></div>
-      </div>
-      <div class="progress-meta">
-        <span id="progress-text">0 / 0 (0%)</span>
-        <span id="total-count" class="muted">Total: —</span>
-      </div>
-
-      <div class="controls">
-        <button id="validateBtn" class="btn primary" disabled>Valider</button>
-        <button id="newBtn" class="btn" disabled>Nouveau</button>
-        <button id="resetBtn" class="btn" disabled>Réinitialiser</button>
-        <label class="toggle">
-          <input type="checkbox" id="revisionToggle" disabled>
-          <span>Mode révision</span>
-        </label>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <p class="hint">
-        Astuces: Entrée = valider • Ctrl+N = nouveau • Ctrl+R = réinitialiser
-      </p>
-    </footer>
-  </main>
+    <p id="result"></p>
+  </div>
 </body>
 </html>
