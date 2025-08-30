@@ -383,3 +383,13 @@
     pickNewVerb();
   });
 })();
+document.addEventListener('keydown', e => {
+  if (e.altKey && (e.key === 'n' || e.key === 'N')) {
+    e.preventDefault();
+    pickNewVerb();
+  }
+  if (e.altKey && (e.key === 'r' || e.key === 'R')) {
+    e.preventDefault();
+    onReset();
+  }
+});
